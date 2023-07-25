@@ -1,9 +1,9 @@
-package com.bezkoder.spring.files.excel.exception;
+package com.buildtechknowledge.spring.files.excel.exception;
 
 import org.springframework.web.multipart.MaxUploadSizeExceededException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-import com.bezkoder.spring.files.excel.message.ResponseMessage;
+import com.buildtechknowledge.spring.files.excel.message.ResponseMessage;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

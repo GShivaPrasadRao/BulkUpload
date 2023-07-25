@@ -13,16 +13,16 @@ import org.springframework.web.multipart.MultipartFile;
 @Service
 public class CSVService {
     @Autowired
-    TutorialRepository repository;
+   TutorialRepository tutorialRepository;
     public void save(MultipartFile file) {
         try {
             List<Tutorial> tutorials = CSVHelper.csvToTutorials(file.getInputStream());
-            repository.saveAll(tutorials);
+            tutorialRepository.saveAll(tutorials);
         } catch (IOException e) {
             throw new RuntimeException("fail to store csv data: " + e.getMessage());
         }
     }
     public List<Tutorial> getAllTutorials() {
-        return repository.findAll();
+        return tutorialRepository.findAll();
     }
 }

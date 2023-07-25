@@ -1,4 +1,4 @@
-package com.bezkoder.spring.files.excel.service;
+package com.buildtechknowledge.spring.files.excel.service;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -8,9 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.bezkoder.spring.files.excel.helper.ExcelHelper;
-import com.bezkoder.spring.files.excel.model.Tutorial;
-import com.bezkoder.spring.files.excel.repository.TutorialRepository;
+import com.buildtechknowledge.spring.files.excel.helper.ExcelHelper;
+import com.buildtechknowledge.spring.files.excel.model.Tutorial;
+import com.buildtechknowledge.spring.files.excel.repository.TutorialRepository;
 
 @Service
 public class ExcelService {
@@ -29,8 +29,8 @@ public class ExcelService {
   public ByteArrayInputStream load() {
     List<Tutorial> tutorials = repository.findAll();
 
-    ByteArrayInputStream in = ExcelHelper.tutorialsToExcel(tutorials);
-    return in;
+//    ByteArrayInputStream in = ExcelHelper.tutorialsToExcel(tutorials);
+    return ExcelHelper.tutorialsToExcel(tutorials);
   }
 
   public List<Tutorial> getAllTutorials() {

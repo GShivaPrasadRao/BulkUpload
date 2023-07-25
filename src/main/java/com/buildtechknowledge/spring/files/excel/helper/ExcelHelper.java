@@ -15,17 +15,23 @@ import org.springframework.web.multipart.MultipartFile;
 import com.buildtechknowledge.spring.files.excel.model.Tutorial;
 
 public class ExcelHelper {
-  public static String TYPE = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+  private ExcelHelper()
+  {
+
+  }
+  public static final String TYPE = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
   static String[] HEADERs = { "Id", "Title", "Description", "Published" };
   static String SHEET = "Tutorials";
 
   public static boolean hasExcelFormat(MultipartFile file) {
 
-    if (!TYPE.equals(file.getContentType())) {
-      return false;
-    }
+    boolean result = TYPE.equals(file.getContentType());
 
-    return true;
+//    if (!TYPE.equals(file.getContentType())) {
+//      return false;
+//    }
+
+    return result;
   }
 
   public static ByteArrayInputStream tutorialsToExcel(List<Tutorial> tutorials) {
@@ -60,9 +66,7 @@ public class ExcelHelper {
 
   public static List<Tutorial> excelToTutorials(InputStream is) {
     try {
-//      Workbook workbook = new XSSFWorkbook(is);
-//
-//      Sheet sheet = workbook.getSheet(SHEET);
+
 
       Workbook workbook = WorkbookFactory.create(is);
       Sheet sheet = workbook.getSheetAt(0);
@@ -94,15 +98,15 @@ public class ExcelHelper {
             break;
 
           case 1:
-            tutorial.setTitle(currentCell.getStringCellValue());
-            break;
-
-          case 2:
             tutorial.setDescription(currentCell.getStringCellValue());
             break;
 
-          case 3:
+          case 2:
             tutorial.setPublished(currentCell.getBooleanCellValue());
+            break;
+
+          case 3:
+            tutorial.setTitle(currentCell.getStringCellValue());
             break;
 
           default:
@@ -119,7 +123,7 @@ public class ExcelHelper {
 
       return tutorials;
     } catch (IOException e) {
-      throw new RuntimeException("fail to parse Excel file: " + e.getMessage());
+      throw new IllegalArgumentException("fail to parse Excel file: " + e.getMessage());
     }
   }
 }

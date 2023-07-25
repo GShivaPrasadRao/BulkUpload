@@ -1,4 +1,4 @@
-package com.bezkoder.spring.files.excel.message;
+package com.buildtechknowledge.spring.files.excel.message;
 
 public class ResponseMessage {
   private String message;
